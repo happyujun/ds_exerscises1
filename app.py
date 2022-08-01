@@ -6,5 +6,7 @@ st.title("데이터과학 실습 과정") #최상위 제목을 쓸 때는 title�
 st.header("1일차")
 st.subheader("파이참 설정 및 사용법")
 st.write("Normal Text")
+st.write("tttNormal Text")
+
 
 #test
