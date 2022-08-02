@@ -4,9 +4,16 @@ import sqlite3
 con = sqlite3.connect('db.db')
 cur = con.cursor()
 
-def check_uid() :
+def check_uid(uid) :
     cur.execute(f"SELECT COUNT(*) FROM users WHERE uid='{uid}'")
+    res = cur.fetchone()
+    return res[0]
+#코드 짤때 항상 결과값을 프린트해서 확인을 해봐야한다.
 
+def check_uemail(uemail) :
+    cur.execute(f"SELECT COUNT(*) FROM users WHERE uemail='{uemail}'")
+    res = cur.fetchone()
+    return res[0]
 
 st.subheader('회원가입 폼')
 
@@ -21,10 +28,19 @@ with st.form('my_form', clear_on_submit = True) :
     ugender = st.radio('성별', options=['남', '여'], horizontal=True)
 
     submitted = st.form_submit_button('제출')
+
     if submitted:
 
         if upw != upw_chk:
             st.warning('비밀번호를 확인하세요!')
+            st.stop()
+
+        if check_uid(uid) :
+            st.warning('동일한 아이디가 존재합니다.')
+            st.stop()
+
+        if check_uemail(uemail):
+            st.warning('동일한 이메일이 존재합니다.')
             st.stop()
 
         st.success(f'{uid} {uname} {upw} {ubd} {ugender}')
