@@ -95,9 +95,9 @@ with st.container():
             ubd = st.date_input('생년월일', value= datetime.strptime(res[4],"%Y-%m-%d"))
             ugender = st.radio('성별', options=['남', '여'], horizontal=True , index = index)
 
-            submitted = st.form_submit_button('수정')
+            submitted2 = st.form_submit_button('수정')
 
-            if submitted:
+            if submitted2:
                 if upw != upw_chk:
                     st.warning('비밀번호를 확인하세요!')
                     st.stop()
@@ -113,6 +113,5 @@ with st.container():
                         f"ubd='{ubd}',"
                         f"ugender='{ugender}' "
                         f" WHERE uid = '{s_uid}' "),
-
 
             con.commit()
