@@ -1,6 +1,7 @@
 import streamlit as st
 import sqlite3
 import pandas as pd
+from datetime import datetime
 
 con = sqlite3.connect('db.db')
 cur = con.cursor()
@@ -77,7 +78,7 @@ with st.container():
             st.warning('해당 아이디는 존재하지 않습니다.')
             st.stop()
 
-        cur.execute(f"SELECT * FROM users WHERE uid = '{s_uid}'")
+        cur.execute(f"SELECT * FROM users WHERE uid = '{s_uid}' ")
         rows = cur.fetchall()
         res = rows[0]
 
@@ -94,4 +95,24 @@ with st.container():
             ubd = st.date_input('생년월일', value= datetime.strptime(res[4],"%Y-%m-%d"))
             ugender = st.radio('성별', options=['남', '여'], horizontal=True , index = index)
 
-            submitted = st.form_submit_button('제출')
+            submitted = st.form_submit_button('수정')
+
+            if submitted:
+                if upw != upw_chk:
+                    st.warning('비밀번호를 확인하세요!')
+                    st.stop()
+
+                if check_uemail(uemail):
+                    st.warning('동일한 이메일이 존재합니다.')
+                    st.stop()
+
+            cur.execute(f"UPDATE users SET "
+                        f"uname='{uname}',"
+                        f"uemail='{uemail}',"
+                        f"upw='{upw}',"
+                        f"ubd='{ubd}',"
+                        f"ugender='{ugender}' "
+                        f" WHERE uid = '{s_uid}' "),
+
+
+            con.commit()
