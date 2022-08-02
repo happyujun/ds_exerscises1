@@ -63,12 +63,32 @@ with st.container():
 st.subheader('회원 검색')
 with st.container():
     col1, col2, col3 = st.columns(3)
+
     with col1 :
         s_uid = st.text_input('아이디')
 
     with col2 :
         s_btn = st.button('검색')
+        d_btn = st.button('삭제')
 
-    with col3 :
-        d_btn = st.button('삭제')정
+    if s_btn :
 
+        if check_uid(s_uid) == 0 :
+            st.warning('해당 아이디는 존재하지 않습니다.')
+            st.stop()
+
+        cur.execute(f"SELECT * FROM users WHERE uid = '{s_uid}'")
+        rows = cur.fetchall()
+        print(rows[0])
+
+
+        with st.form('my_form_mod', clear_on_submit=True):
+
+            uname = st.text_input('성명', max_chars=10).strip()
+            uemail = st.text_input('이메일').strip()
+            upw = st.text_input('비밀번호', type='password').strip()
+            upw_chk = st.text_input('비밀번호 확인', type='password').strip()
+            ubd = st.date_input('생년월일')
+            ugender = st.radio('성별', options=['남', '여'], horizontal=True)
+
+            submitted = st.form_submit_button('제출')
