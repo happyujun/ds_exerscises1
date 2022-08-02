@@ -56,7 +56,7 @@ with st.container():
     cols = [column[0] for column in cur.description] #열
 
     df = pd.DataFrame.from_records(data = rows, columns =cols )
-    st.
+    st.dataframe(df)
 
 
    # for row in rows :
