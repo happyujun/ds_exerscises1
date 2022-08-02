@@ -79,16 +79,18 @@ with st.container():
 
         cur.execute(f"SELECT * FROM users WHERE uid = '{s_uid}'")
         rows = cur.fetchall()
-        print(rows[0])
 
+        index =0
+        if res[5] == '여' :
+            index =1
 
         with st.form('my_form_mod', clear_on_submit=True):
 
-            uname = st.text_input('성명', max_chars=10).strip()
-            uemail = st.text_input('이메일').strip()
-            upw = st.text_input('비밀번호', type='password').strip()
+            uname = st.text_input('성명', max_chars=10, value = res[1]).strip()
+            uemail = st.text_input('이메일', value=res[2]).strip()
+            upw = st.text_input('비밀번호', type='password',value=res[3]).strip()
             upw_chk = st.text_input('비밀번호 확인', type='password').strip()
-            ubd = st.date_input('생년월일')
-            ugender = st.radio('성별', options=['남', '여'], horizontal=True)
+            ubd = st.date_input('생년월일',value=res[4])
+            ugender = st.radio('성별', options=['남', '여'], horizontal=True , index = index)
 
             submitted = st.form_submit_button('제출')
