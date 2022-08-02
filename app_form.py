@@ -4,6 +4,10 @@ import sqlite3
 con = sqlite3.connect('db.db')
 cur = con.cursor()
 
+def check_uid() :
+    cur.execute(f"SELECT COUNT(*) FROM users WHERE uid='{uid}'")
+
+
 st.subheader('회원가입 폼')
 
 with st.form('my_form', clear_on_submit = True) :
