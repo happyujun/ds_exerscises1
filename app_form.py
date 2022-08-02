@@ -43,8 +43,10 @@ with st.form('my_form', clear_on_submit = True) :
             st.warning('동일한 이메일이 존재합니다.')
             st.stop()
 
-        st.success(f'{uid} {uname} {upw} {ubd} {ugender}')
+        st.success(f'{uid} {uname} {uemail} {upw} {ubd} {ugender}')
+
         cur.execute(f"INSERT INTO users VALUES ("
                     f"'{uid}','{uname}','{uemail}','{upw}',"
                     f"'{ubd}','{ugender}',CURRENT_DATE)")
+
         con.commit()
