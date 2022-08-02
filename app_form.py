@@ -17,6 +17,8 @@ def check_uemail(uemail):
     res = cur.fetchone()
     return res[0]
 
+
+
 st.subheader('회원가입 양식')
 
 with st.form('my_form', clear_on_submit=True):
