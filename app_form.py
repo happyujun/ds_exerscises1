@@ -55,7 +55,8 @@ with st.container():
     rows = cur.fetchall() #행
     cols = [column[0] for column in cur.description] #열
 
-    df = pd.DataFrame.from_records(data = rows, columns = )
+    df = pd.DataFrame.from_records(data = rows, columns =cols )
+    st.
 
 
    # for row in rows :
