@@ -1,5 +1,6 @@
 import streamlit as st
 import sqlite3
+import pandas as pd
 
 con = sqlite3.connect('db.db')
 cur = con.cursor()
@@ -15,7 +16,7 @@ def check_uemail(uemail):
     res = cur.fetchone()
     return res[0]
 
-st.subheader('회원가입 폼')
+st.subheader('회원가입 양식')
 
 with st.form('my_form', clear_on_submit=True):
     st.info('다음 양식을 모두 입력 후 제출합니다.')
@@ -46,4 +47,17 @@ with st.form('my_form', clear_on_submit=True):
                     f"'{uid}','{uname}', '{uemail}', '{upw}',"
                     f"'{ubd}','{ugender}',CURRENT_DATE)")
         con.commit()
+
+st.subheader('회원 목록')
+with st.container():
+    cur .execute("SELECT * FROM users")
+
+    rows = cur.fetchall() #행
+    cols = [column[0] for column in cur.description] #열
+
+    df = pd.DataFrame.from_records(data = rows, columns = )
+
+
+   # for row in rows :
+
 
