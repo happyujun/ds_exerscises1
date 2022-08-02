@@ -60,6 +60,15 @@ with st.container():
     st.dataframe(df)
 
 
-   # for row in rows :
+st.subheader('회원 검색')
+with st.container():
+    col1, col2, col3 = st.columns(3)
+    with col1 :
+        s_uid = st.text_input('아이디')
 
+    with col2 :
+        s_btn = st.button('검색')
+
+    with col3 :
+        d_btn = st.button('삭제')
 
