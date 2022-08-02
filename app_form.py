@@ -70,5 +70,5 @@ with st.container():
         s_btn = st.button('검색')
 
     with col3 :
-        d_btn = st.button('삭제')
+        d_btn = st.button('삭제')정
 
