@@ -46,6 +46,7 @@ with st.form('my_form', clear_on_submit=True):
         cur.execute(f"INSERT INTO users VALUES ("
                     f"'{uid}','{uname}', '{uemail}', '{upw}',"
                     f"'{ubd}','{ugender}',CURRENT_DATE)")
+
         con.commit()
 
 st.subheader('회원 목록')
