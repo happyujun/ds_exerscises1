@@ -79,6 +79,7 @@ with st.container():
 
         cur.execute(f"SELECT * FROM users WHERE uid = '{s_uid}'")
         rows = cur.fetchall()
+        res = rows[0]
 
         index =0
         if res[5] == '여' :
@@ -90,7 +91,7 @@ with st.container():
             uemail = st.text_input('이메일', value=res[2]).strip()
             upw = st.text_input('비밀번호', type='password',value=res[3]).strip()
             upw_chk = st.text_input('비밀번호 확인', type='password').strip()
-            ubd = st.date_input('생년월일',value=res[4])
+            ubd = st.date_input('생년월일', value= datetime.strptime(res[4],"%Y-%m-%d"))
             ugender = st.radio('성별', options=['남', '여'], horizontal=True , index = index)
 
             submitted = st.form_submit_button('제출')
